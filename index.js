@@ -38,17 +38,67 @@ const userInput = () => {
             choices: ["Manager", "Engineer", "Intern"],
         },
     ])
-    .then (function(input) {
-        console.log(input)
-        let testEngineer = new Engineer(
-            input.name,
-            input.id,
-            input.email,
-            input.github,
-        )
-        employeeGroup.push(testEngineer)
-        // addEmployee()
-    })
+
+    if (answers.role === "Manager") {
+        const managerAnswer = inquirer.prompt([
+            {
+                type: "input",
+                name: "officeNumber",
+                message: "What is your office number?",
+            },
+        ])
+
+        const newManager = new Manager(
+            answers.name,
+            answers.id,
+            answers.email,
+            managerAnswer.officeNumber
+        );
+        teamData.push(newManager);
+    } else if (answers.role === "Intern") {
+        const internAnswer = inquirer.prompt([
+            {
+                type: "input",
+                name: "school",
+                message: "What college/university did you go to?",
+            },
+        ])
+
+        const newIntern = new Intern(
+            answers.name,
+            answers.id,
+            answers.email,
+            internAnswer.school
+        );
+        teamData.push(newIntern)
+    } else if(answers.role === "Engineer") {
+        const engineerAnswer = inquirer.prompt([
+            {
+                type: "input",
+                name: "github",
+                message: "What is your username on Github?",
+            },
+        ])
+
+        const newEngineeer = new Engineer(
+            answers.name,
+            answers.id,
+            answers.email,
+            engineerAnswer.github
+        );
+        teamData.push(newEngineeer)
+    }
+    // .then (function(input) {
+    //     console.log(input)
+    //     let testEngineer = new Engineer(
+    //         input.name,
+    //         input.id,
+    //         input.email,
+    //         input.github,
+    //     )
+    //     employeeGroup.push(testEngineer)
+    //     // addEmployee()
+    // })
 
 }
 function makeProfile () {
