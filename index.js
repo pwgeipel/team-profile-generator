@@ -1,5 +1,6 @@
-import inquirer from 'inquirer';
-import fs from "fs"
+const inquirer = require("inquirer")
+const fs = require("fs")
+
 // import generateHTML from './src/generateHTML.js'
 
 // const Manager = require("./lib/Manager.js")
@@ -7,7 +8,11 @@ import fs from "fs"
 // const Intern = require("./lib/Intern.js")
 
 // const questions = 
-const employeeGroup = [];
+const Manager = require("./lib/Manager.js")
+const Engineer = require("./lib/Engineer.js")
+const Intern = require("./lib/Intern.js")
+
+const teamData = [];
 
 const userInput = () => {
     inquirer.prompt([
@@ -18,13 +23,19 @@ const userInput = () => {
         },
         {
             type: "input",
-            name: "name",
-            message: "What is your name?",
+            name: "id",
+            message: "What is your ID number?",
         },
         {
             type: "input",
-            name: "name",
-            message: "What is your name?",
+            name: "email",
+            message: "What is your email?",
+        },
+        {
+            type: "choice",
+            name: "role",
+            message: "What is your role?",
+            choices: ["Manager", "Engineer", "Intern"],
         },
     ])
     .then (function(input) {
